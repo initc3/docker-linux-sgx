@@ -1,0 +1,8 @@
+services:
+- docker
+
+jobs:
+  include:
+    - stage: Build images
+      name: linux-sgx-2.6_ubuntu-18.04
+      script: docker build 2.6/ubuntu-18.04
