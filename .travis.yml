@@ -3,6 +3,9 @@ services:
 
 jobs:
   include:
+    - stage: linux-sgx 2.1
+      name: linux-sgx-2.1_ubuntu-16.04
+      script: docker build 2.1.3/ubuntu-16.04
     - stage: linux-sgx 2.6
       name: linux-sgx-2.6_ubuntu-18.04
       script: docker build 2.6/ubuntu-18.04
