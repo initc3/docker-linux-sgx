@@ -1,13 +1,21 @@
 # docker linux-sgx
 Dockerfiles for [linux-sgx](https://github.com/intel/linux-sgx).
 
-Currently only versions 2.6, 2.7.1, 2.9.1, and 2.11, for Ubuntu 18.04, are
-provided. Please refer to the official repository,
-https://github.com/intel/linux-sgx, for other versions.
+Provided versions:
 
-Please note that there's are also `Dockerfile`s for the SGX SDK version 2.1.3
-and 2.2. It does not have the PSW as installing the PSW for this version
-requires the driver.
+SGX version | OS | SDK | PSW
+--- | --- | --- | ---
+2.1.3 | Ubuntu 16.04 | :heavy_check_mark: | :x:
+2.2 | Ubuntu 16.04 | :heavy_check_mark: | :x:
+2.3.1 | <br>Ubuntu 16.04</br><br>Ubuntu 18.04</br> | <br>:heavy_check_mark:</br><br>:heavy_check_mark:</br> | <br>:x:</br><br>:heavy_check_mark:</br>
+2.6 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
+2.7.1 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
+2.9.1 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
+2.11 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
+
+
+Please refer to the official repository,
+https://github.com/intel/linux-sgx, for other versions.
 
 Images are available on DockerHub under
 [initc3/linux-sgx](https://hub.docker.com/repository/docker/initc3/linux-sgx).
