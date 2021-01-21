@@ -12,6 +12,7 @@ SGX version | OS | SDK | PSW
 2.7.1 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
 2.9.1 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
 2.11 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
+2.12 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
 
 Please refer to the official repository,
 https://github.com/intel/linux-sgx, for other versions.
@@ -22,7 +23,7 @@ Images are available on DockerHub under
 Example of usage:
 
 ```dockerfile
-FROM initc3/linux-sgx:2.11
+FROM initc3/linux-sgx:2.12-ubuntu18.04
 
 # ...
 ```
