@@ -34,7 +34,14 @@ RUN set -eux; \
     wget -qO - "$url/intel-sgx-deb.key" | apt-key add -; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
+                libsgx-headers \
+                libsgx-ae-epid \
+                libsgx-ae-le \
+                libsgx-ae-pce \
+                libsgx-aesm-epid-plugin \
                 libsgx-aesm-launch-plugin \
+                libsgx-aesm-pce-plugin \
+                libsgx-aesm-quote-ex-plugin \
                 libsgx-enclave-common \
                 libsgx-enclave-common-dev \
                 libsgx-epid \
@@ -44,7 +51,8 @@ RUN set -eux; \
                 libsgx-quote-ex \
                 libsgx-quote-ex-dev \
                 libsgx-uae-service \
-                libsgx-urts; \
+                libsgx-urts \
+                sgx-aesm-service; \
     rm -rf /var/lib/apt/lists/*;
 
 # binutils
