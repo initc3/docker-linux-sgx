@@ -36,3 +36,8 @@ jobs:
       script: docker build 2.13/ubuntu-18.04
     - name: linux-sgx-2.13_ubuntu-20.04
       script: docker build 2.13/ubuntu-20.04
+    - stage: linux-sgx 2.13.3
+      name: linux-sgx-2.13.3_ubuntu-18.04
+      script: docker build 2.13.3/ubuntu-18.04
+    - name: linux-sgx-2.13.3_ubuntu-20.04
+      script: docker build 2.13.3/ubuntu-20.04
