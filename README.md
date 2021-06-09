@@ -14,6 +14,7 @@ SGX version | OS | SDK | PSW
 2.11 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
 2.12 | Ubuntu 18.04 | :heavy_check_mark: | :heavy_check_mark:
 2.13 | <br>Ubuntu 18.04</br><br>Ubuntu 20.04</br> | :heavy_check_mark: | :heavy_check_mark:
+2.13.3 | <br>Ubuntu 18.04</br><br>Ubuntu 20.04</br> | :heavy_check_mark: | :heavy_check_mark:
 
 Please refer to the official repository,
 https://github.com/intel/linux-sgx, for other versions.
