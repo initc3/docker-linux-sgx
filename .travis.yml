@@ -44,3 +44,8 @@ jobs:
     - stage: linux-sgx 2.14
       name: linux-sgx-2.14_ubuntu-20.04
       script: docker build 2.14/ubuntu-20.04
+    - stage: linux-sgx 2.15.1
+      name: linux-sgx-sdk-2.15.1_ubuntu-20.04
+      script: docker build --tag sdk 2.15.1/ubuntu-20.04
+    - name: linux-sgx-psw-2.15.1_ubuntu-20.04
+      script: docker build 2.15.1/ubuntu-20.04
