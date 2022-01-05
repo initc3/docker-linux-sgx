@@ -31,8 +31,8 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: 2.15.1/ubuntu-20.04
-          file: ./Dockerfile
+          context: .
+          file: ./2.15.1/ubuntu-20.04/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           #tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
