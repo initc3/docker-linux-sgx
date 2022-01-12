@@ -3,60 +3,57 @@ name: ci
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
   workflow_dispatch:
 
 jobs:
   build_and_push:
-    if: github.event_name	== 'push'
     runs-on: ubuntu-latest
 
     steps:
       -
         name: Checkout
         uses: actions/checkout@v2
-
+      -
+        name: Set Short SHA
+        id: vars
+        run: echo "::set-output name=short_sha::$(git rev-parse --short HEAD)"
       -
         name: Login to Dockerhub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
-        name: Build and push
+        name: Build & push docker image for linux-sgx 2.15.1
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./2.15.1/ubuntu-20.04/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: initc3/linux-sgx:latest, initc3/linux-sgx:2.15.1, initc3/linux-sgx:${{ github.sha }}
+          tags: |
+            initc3/linux-sgx:latest,
+            initc3/linux-sgx:2.15.1,
+            initc3/linux-sgx:2.15.1-ubuntu20.04,
+            initc3/linux-sgx:2.15.1-${{ steps.vars.outputs.short_sha }},
+            initc3/linux-sgx:${{ steps.vars.outputs.short_sha }}
           cache-from: type=registry,ref=initc3/linux-sgx:buildcache
           cache-to: type=registry,ref=initc3/linux-sgx:buildcache,mode=max
-
-  just_build:
-    if: github.event_name	== 'pull_request'
-    runs-on: ubuntu-latest
-
-    steps:
       -
-        name: Checkout
-        uses: actions/checkout@v2
-
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Build and push
+        name: Build & push docker image for linux-sgx 2.14
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./2.15.1/ubuntu-20.04/Dockerfile
+          file: ./2.14/ubuntu-20.04/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
-          tags: linux-sgx:2.15.1, linux-sgx:${{ github.sha }}
+          push: true
+          tags: |
+            initc3/linux-sgx:2.14,
+            initc3/linux-sgx:2.14-ubuntu20.04,
+            initc3/linux-sgx:2.14-${{ steps.vars.outputs.short_sha }}
+          cache-from: type=registry,ref=initc3/linux-sgx:buildcache
+          caphe-to: type=registry,ref=initc3/linux-sgx:buildcache,mode=max
