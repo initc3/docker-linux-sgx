@@ -43,3 +43,24 @@ jobs:
             initc3/linux-sgx:2.14,
             initc3/linux-sgx:2.14-ubuntu20.04,
             initc3/linux-sgx:2.14-${{ steps.vars.outputs.short_sha }}
+      -
+        name: Build docker image for linux-sgx 2.13.3 ubuntu 20.04
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./2.13.3/ubuntu-20.04/Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
+          tags: |
+            initc3/linux-sgx:2.13.3,
+            initc3/linux-sgx:2.13.3-ubuntu20.04,
+            initc3/linux-sgx:2.13.3-${{ steps.vars.outputs.short_sha }}
+      -
+        name: Build docker image for linux-sgx 2.13.3 ubuntu 18.04
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./2.13.3/ubuntu-18.04/Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
+          tags: |
+            initc3/linux-sgx:2.13.3-ubuntu18.04
+            initc3/linux-sgx:2.13.3-ubuntu18.04-${{ steps.vars.outputs.short_sha }}
