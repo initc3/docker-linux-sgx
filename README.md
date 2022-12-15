@@ -20,6 +20,7 @@ SGX version | OS | SDK | PSW | SGX SSL
 2.16 | <br>Ubuntu 20.04</br> | :heavy_check_mark: | :heavy_check_mark: | :x:
 2.17 | <br>Ubuntu 20.04</br> | :heavy_check_mark: | :heavy_check_mark: | :x:
 2.17.1 | <br>Ubuntu 20.04</br> | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:
+2.18 | <br>Ubuntu 20.04</br><br>Ubuntu 22.04</br> | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:
 
 Please refer to the official repository,
 https://github.com/intel/linux-sgx, for other versions.
@@ -30,7 +31,7 @@ Images are available on DockerHub under
 Example of usage:
 
 ```dockerfile
-FROM initc3/linux-sgx:2.17.1
+FROM initc3/linux-sgx:2.18
 
 # ...
 ```
