@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./2.19/debian10/Dockerfile
+          file: ./2.19/debian-10/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: |

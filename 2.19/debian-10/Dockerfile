@@ -90,6 +90,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
                 libsgx-enclave-common-dbgsym \
                 libsgx-dcap-ql-dbgsym \
                 libsgx-dcap-default-qpl-dbgsym \
+                libsgx-dcap-quote-verify-dev \
     && rm -rf /var/lib/apt/lists/*
 
 
