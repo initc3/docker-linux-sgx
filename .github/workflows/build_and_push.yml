@@ -48,8 +48,8 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-buster,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-buster-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.19 ubuntu 22.04
         uses: docker/build-push-action@v4
@@ -63,8 +63,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-ubuntu22.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.18 ubuntu 22.04
         uses: docker/build-push-action@v4
@@ -77,8 +77,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-ubuntu22.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.18 ubuntu 20.04
         uses: docker/build-push-action@v4
@@ -90,8 +90,8 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-ubuntu20.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.17.1
         uses: docker/build-push-action@v4
@@ -104,8 +104,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17.1,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17.1-ubuntu20.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17.1-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.17
         uses: docker/build-push-action@v4
@@ -118,8 +118,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17-ubuntu20.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.16
         uses: docker/build-push-action@v4
@@ -132,8 +132,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.16,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.16-ubuntu20.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.16-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.15.1
         uses: docker/build-push-action@v4
@@ -146,8 +146,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.15.1,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.15.1-ubuntu20.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.15.1-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.15.1
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.15.1,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.14
         uses: docker/build-push-action@v4
@@ -160,8 +160,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.14,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.14-ubuntu20.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.14-${{ steps.vars.outputs.short_sha }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.14
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.14,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.13.3 ubuntu 20.04
         uses: docker/build-push-action@v4
@@ -174,8 +174,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-ubuntu20.04,
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-${{ steps.vars.outputs.short_sha }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.13.3
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.13.3,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       -
         name: Build & push docker image for linux-sgx 2.13.3 ubuntu 18.04
         uses: docker/build-push-action@v4
@@ -187,5 +187,5 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-ubuntu18.04
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-ubuntu18.04-${{ steps.vars.outputs.short_sha }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.13.3-ubuntu1804
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache-2.13.3-ubuntu1804,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
