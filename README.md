@@ -5,8 +5,7 @@ Provided versions:
 
 SGX version | OS | SDK | PSW | SGX SSL
 --- | --- | --- | --- | ---
-2.19 | <br>Ubuntu 22.04</br> | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:
-2.19 | <br>Debian 10</br> | :heavy_check_mark: | :heavy_check_mark: | :x:
+2.19 | <br>Ubuntu 22.04</br><br>Debian 10</br>| :heavy_check_mark: | :heavy_check_mark: | <br>:heavy_check_mark:</br><br>:x:</br>
 2.18 | <br>Ubuntu 20.04</br><br>Ubuntu 22.04</br> | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:
 2.17.1 | <br>Ubuntu 20.04</br> | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark:
 2.16 | <br>Ubuntu 20.04</br> | :heavy_check_mark: | :heavy_check_mark: | :x:
