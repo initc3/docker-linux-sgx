@@ -27,12 +27,15 @@ SGX version | OS | SDK | PSW | SGX SSL
 Please refer to the official repository,
 https://github.com/intel/linux-sgx, for other versions.
 
-Images are available on under [ghcr.io/initc3/linux-sgx](ghcr.io/initc3/linux-sgx).
+Images are available on under [ghcr.io/initc3/linux-sgx][ghcr.io/initc3/linux-sgx].
 
-Example of usage:
+
+## Usage
 
 ```dockerfile
 FROM ghcr.io/initc3/linux-sgx:2.19-buster
 
 # ...
 ```
+
+[ghcr.io/initc3/linux-sgx]: https://github.com/initc3/docker-linux-sgx/pkgs/container/linux-sgx
