@@ -1,6 +1,10 @@
 FROM ubuntu:22.04 as sdk
 
-ENV DEBIAN_FRONTEND=noninteractive
+LABEL org.opencontainers.image.source=https://github.com/initc3/docker-linux-sgx/tree/master/2.19/ubuntu-22.04
+LABEL org.opencontainers.image.description="Linux SGX v2.19 for Ubuntu 22.04 (jammy)"
+LABEL org.opencontainers.image.licenses=BSD-3-Clause
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
                 build-essential \
