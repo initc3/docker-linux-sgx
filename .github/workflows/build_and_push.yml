@@ -16,15 +16,23 @@ jobs:
       matrix:
         version: [2.13.3, 2.14, 2.15.1, 2.16, 2.17.1, 2.18, 2.19]
         distro: [focal]
+        dockerfile: [Dockerfile]
         include:
           - version: 2.13.3
             distro: bionic
+            dockerfile: Dockerfile
           - version: 2.18
             distro: jammy
+            dockerfile: Dockerfile
           - version: 2.19
             distro: jammy
+            dockerfile: Dockerfile
           - version: 2.19
             distro: buster
+            dockerfile: Dockerfile
+          - version: 2.19
+            distro: buster
+            dockerfile: aesm.Dockerfile
         exclude:
           - version: 2.19
             distro: focal
@@ -55,7 +63,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./${{ matrix.version }}/${{ matrix.distro }}/Dockerfile
+          file: ./${{ matrix.version }}/${{ matrix.distro }}/${{ matrix.dockerfile }}
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: |
