@@ -6,12 +6,30 @@ on:
 
   workflow_dispatch:
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: initc3/linux-sgx
+
 jobs:
-  build_and_push:
+  linux-sgx:
+    strategy:
+      matrix:
+        version: [2.13.3, 2.14, 2.15.1, 2.16, 2.17.1, 2.18, 2.19]
+        distro: [focal]
+        include:
+          - version: 2.13.3
+            distro: bionic
+          - version: 2.18
+            distro: jammy
+          - version: 2.19
+            distro: jammy
+          - version: 2.19
+            distro: buster
+        exclude:
+          - version: 2.19
+            distro: focal
+
     runs-on: ubuntu-latest
-    env:
-      REGISTRY: ghcr.io
-      IMAGE_NAME: initc3/linux-sgx
 
     steps:
       -
@@ -33,140 +51,15 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       -
-        name: Build & push docker image for linux-sgx 2.13.3 ubuntu 18.04
+        name: Build docker image for linux-sgx ${{ matrix.version }} ${{ matrix.distro }}
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./2.13.3/ubuntu-18.04/Dockerfile
+          file: ./${{ matrix.version }}/${{ matrix.distro }}/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-ubuntu18.04
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-ubuntu18.04-${{ steps.vars.outputs.short_sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.13.3 ubuntu 20.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.13.3/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-ubuntu20.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.13.3-${{ steps.vars.outputs.short_sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.14
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.14/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.14,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.14-ubuntu20.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.14-${{ steps.vars.outputs.short_sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.15.1
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.15.1/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.15.1,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.15.1-ubuntu20.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.15.1-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.16
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.16/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.16,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.16-ubuntu20.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.16-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.17.1
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.17.1/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17.1,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17.1-ubuntu20.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.17.1-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.18 ubuntu 20.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.18/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-ubuntu20.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.18 ubuntu 22.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.18/ubuntu-22.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-ubuntu22.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.18-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.19 debian 10 (buster)
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.19/debian-10/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-buster,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-buster-${{ steps.vars.outputs.short_sha }},
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-      -
-        name: Build & push docker image for linux-sgx 2.19 ubuntu 22.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.19/ubuntu-22.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-ubuntu22.04,
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:2.19-${{ steps.vars.outputs.short_sha }},
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.version }}-${{ matrix.distro }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.version }}-${{ matrix.distro }}-${{ steps.vars.outputs.short_sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
