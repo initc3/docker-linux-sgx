@@ -6,11 +6,29 @@ on:
 
   workflow_dispatch:
 
+env:
+  IMAGE_NAME: initc3/gramine
+
 jobs:
-  just_build:
+  linux-sgx:
+    strategy:
+      matrix:
+        version: [2.13.3, 2.14, 2.15.1, 2.16, 2.17.1, 2.18, 2.19]
+        distro: [focal]
+        include:
+          - version: 2.13.3
+            distro: bionic
+          - version: 2.18
+            distro: jammy
+          - version: 2.19
+            distro: jammy
+          - version: 2.19
+            distro: buster
+        exclude:
+          - version: 2.19
+            distro: focal
+
     runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: initc3/gramine
 
     steps:
       -
@@ -24,120 +42,12 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
-        name: Build docker image for linux-sgx 2.19 debian 10 (buster)
+        name: Build docker image for linux-sgx ${{ matrix.version }} ${{ matrix.distro }}
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./2.19/debian-10/Dockerfile
+          file: ./${{ matrix.version }}/${{ matrix.distro }}/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           tags: |
-            initc3/linux-sgx:2.19-buster,
-            initc3/linux-sgx:2.19-buster-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.19 ubuntu 22.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.19/ubuntu-22.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.19,
-            initc3/linux-sgx:2.19-ubuntu22.04,
-            initc3/linux-sgx:2.19-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.18 ubuntu 22.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.18/ubuntu-22.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.18,
-            initc3/linux-sgx:2.18-ubuntu22.04,
-            initc3/linux-sgx:2.18-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.18 ubuntu 20.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.18/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.18-ubuntu20.04,
-            initc3/linux-sgx:2.18-ubuntu20.04-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.17.1
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.17.1/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.17.1,
-            initc3/linux-sgx:2.17.1-ubuntu20.04,
-            initc3/linux-sgx:2.17.1-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.17
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.17/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.17,
-            initc3/linux-sgx:2.17-ubuntu20.04,
-            initc3/linux-sgx:2.17-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.16
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.16/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.16,
-            initc3/linux-sgx:2.16-ubuntu20.04,
-            initc3/linux-sgx:2.16-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.15.1
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.15.1/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.15.1,
-            initc3/linux-sgx:2.15.1-ubuntu20.04,
-            initc3/linux-sgx:2.15.1-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.14
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.14/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.14,
-            initc3/linux-sgx:2.14-ubuntu20.04,
-            initc3/linux-sgx:2.14-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.13.3 ubuntu 20.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.13.3/ubuntu-20.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.13.3,
-            initc3/linux-sgx:2.13.3-ubuntu20.04,
-            initc3/linux-sgx:2.13.3-${{ steps.vars.outputs.short_sha }}
-      -
-        name: Build docker image for linux-sgx 2.13.3 ubuntu 18.04
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./2.13.3/ubuntu-18.04/Dockerfile
-          builder: ${{ steps.buildx.outputs.name }}
-          tags: |
-            initc3/linux-sgx:2.13.3-ubuntu18.04
-            initc3/linux-sgx:2.13.3-ubuntu18.04-${{ steps.vars.outputs.short_sha }}
+            initc3/linux-sgx:${{ matrix.version }}-${{ matrix.distro }},
+            initc3/linux-sgx:${{ matrix.version }}-${{ matrix.distro }}-${{ steps.vars.outputs.short_sha }}
