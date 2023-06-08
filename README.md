@@ -22,10 +22,50 @@ Images are available on under [ghcr.io/initc3/linux-sgx][ghcr.io/initc3/linux-sg
 ## Usage
 
 ```dockerfile
-FROM ghcr.io/initc3/linux-sgx:2.19-buster
+FROM ghcr.io/initc3/sgx:2.19-buster
 
 # ...
 ```
+
+## sgx aesm service
+There's a dedicated image to run the sgx aesm service in a container.
+
+It can be used with docker compose. For example:
+
+```yml
+version: '3.9'
+
+services:
+
+  aesmd:
+    image: ghcr.io/initc3/sgx-aesm:2.19-buster
+    volumes:
+      - aesmd-socket:/var/run/aesmd
+    devices:
+      - /dev/sgx_enclave
+      - /dev/sgx_provision
+
+  sample-enclave:
+    image: sample-enclave
+    depends_on:
+      aesmd:
+        condition: service_started
+    volumes:
+      - aesmd-socket:/var/run/aesmd
+    devices:
+      - /dev/sgx_enclave
+
+volumes:
+  aesmd-socket:
+    driver: local
+    driver_opts:
+      type: "tmpfs"
+      device: "tmpfs"
+      o: "rw"
+```
+
+Complete example under [examples/sample-enclave](examples/sample-enclave).
+
 
 ## Older versions
 The following versions are available on DockerHub at
